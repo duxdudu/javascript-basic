@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>JavaScript Exercises – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .exercise {
+      background: #1e293b;
+      border-left: 4px solid #6366f1;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      max-width: 760px;
+    }
+    .exercise h3 {
+      color: #818cf8;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .difficulty {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .easy { background: #166534; color: #bbf7d0; }
+    .medium { background: #854d0e; color: #fef08a; }
+    .hard { background: #991b1b; color: #fca5a5; }
+    .task-list {
+      color: #cbd5e1;
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+    .task-list li { margin-bottom: 6px; }
+    .hint {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .hint strong { color: #fbbf24; }
+    .section-title {
+      font-size: 1.4rem;
+      color: #f1f5f9;
+      margin: 40px 0 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #334155;
+      max-width: 760px;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>✏️ JavaScript Exercises</h1>
+  <p class="intro">Practice what you've learned. Try to solve each exercise on your own before looking at the hints.</p>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">📦 Variables & Data Types</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 1: Create Variables</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create variables to store the following information about yourself:</p>
+    <ul class="task-list">
+      <li>Your first name (string)</li>
+      <li>Your age (number)</li>
+      <li>Whether you are a student (boolean)</li>
+      <li>Your favorite color (string)</li>
+    </ul>
+    <p>Then log each variable to the console.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>const</code> for values that won't change. Use <code>console.log()</code> to print.
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 2: Check Data Types</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create 5 different variables with different data types (string, number, boolean, null, undefined). Use <code>typeof</code> to check and log the type of each one.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>console.log(typeof myVariable);</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">➕ Operators & Math</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 3: Simple Calculator</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create two variables with numbers. Then calculate and log:</p>
+    <ul class="task-list">
+      <li>Their sum</li>
+      <li>Their difference</li>
+      <li>Their product</li>
+      <li>Their quotient</li>
+      <li>The remainder when dividing them</li>
+    </ul>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and <code>%</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 4: Age Checker</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create a variable <code>age</code>. Write code that checks if the person is 18 or older. If yes, log "You can vote". If no, log "You are too young to vote".</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use an <code>if/else</code> statement with the <code>>=</code> operator.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">🔀 Conditionals</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 5: Grade Calculator</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create a variable <code>score</code> (0-100). Write code that assigns a letter grade:</p>
+    <ul class="task-list">
+      <li>90-100: A</li>
+      <li>80-89: B</li>
+      <li>70-79: C</li>
+      <li>60-69: D</li>
+      <li>Below 60: F</li>
+    </ul>
+    <p>Log the grade to the console.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>if/else if/else</code> statements.
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 6: Day of the Week</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create a variable <code>day</code> with a number 1-7. Use a <code>switch</code> statement to log the day name (1 = Monday, 2 = Tuesday, etc.). If the number is invalid, log "Invalid day".</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>switch(day)</code> with <code>case</code> for each number and <code>default</code> for invalid input.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">🔁 Loops</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 7: Count to 10</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Use a <code>for</code> loop to log numbers 1 through 10 to the console.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>for (let i = 1; i <= 10; i++) { ... }</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 8: Even Numbers Only</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Use a <code>for</code> loop to log only the even numbers from 1 to 20.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>if (i % 2 === 0)</code> inside the loop to check if a number is even.
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 9: Sum of Numbers</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Use a loop to calculate the sum of all numbers from 1 to 100. Log the result.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Create a variable <code>sum = 0</code> before the loop, then add each number to it: <code>sum += i</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">⚙️ Functions</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 10: Greeting Function</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Write a function called <code>greet</code> that takes a name as a parameter and returns "Hello, [name]!". Call the function with different names and log the results.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>function greet(name) { return "Hello, " + name + "!"; }</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 11: Is Even Function</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Write a function <code>isEven</code> that takes a number and returns <code>true</code> if it's even, <code>false</code> if it's odd.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use the modulo operator: <code>return num % 2 === 0;</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 12: Max of Two Numbers</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Write a function <code>max</code> that takes two numbers and returns the larger one.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use an <code>if</code> statement or the ternary operator: <code>return a > b ? a : b;</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 13: Celsius to Fahrenheit</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Write a function that converts Celsius to Fahrenheit. Formula: <code>F = (C × 9/5) + 32</code></p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>function toFahrenheit(c) { return (c * 9/5) + 32; }</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">📋 Arrays</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 14: Create and Access Array</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create an array of 5 fruits. Log the first fruit, the last fruit, and the total number of fruits.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>array[0]</code> for first, <code>array[array.length - 1]</code> for last, <code>array.length</code> for count.
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 15: Add and Remove Items</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Start with an empty array. Add 3 items using <code>push</code>. Remove the last item using <code>pop</code>. Log the array after each operation.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>arr.push("item")</code> and <code>arr.pop()</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 16: Loop Through Array</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create an array of numbers. Use a <code>for</code> loop to log each number multiplied by 2.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>for (let i = 0; i < arr.length; i++) { console.log(arr[i] * 2); }</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 17: Filter Array</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create an array of numbers from 1 to 10. Use <code>filter</code> to create a new array with only numbers greater than 5.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>const filtered = numbers.filter(n => n > 5);</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 18: Map Array</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create an array of names. Use <code>map</code> to create a new array where each name is converted to uppercase.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>const upper = names.map(name => name.toUpperCase());</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 19: Sum Array</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create an array of numbers. Write a function that takes the array and returns the sum of all numbers.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use a loop or <code>reduce</code>: <code>arr.reduce((sum, n) => sum + n, 0)</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">🗂️ Objects</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 20: Create a Person Object</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create an object representing a person with properties: name, age, city, and isStudent. Log each property.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>const person = { name: "Alice", age: 25, ... };</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 21: Object with Method</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create a <code>car</code> object with properties: brand, model, year. Add a method <code>getInfo</code> that returns a string like "2020 Toyota Camry".</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>getInfo: function() { return this.year + " " + this.brand + " " + this.model; }</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 22: Array of Objects</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create an array of 3 book objects. Each book should have: title, author, pages. Use <code>forEach</code> to log each book's title.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>books.forEach(book => console.log(book.title));</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">🌐 DOM Manipulation</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 23: Change Text Content</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create an HTML page with a paragraph that says "Original text". Use JavaScript to change it to "Text changed by JavaScript".</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>document.querySelector("p").textContent = "Text changed by JavaScript";</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 24: Change Styles</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create a div with some text. Use JavaScript to change its background color to blue and text color to white.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>element.style.backgroundColor = "blue"; element.style.color = "white";</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 25: Add Elements</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create an empty <code>&lt;ul&gt;</code> in HTML. Use JavaScript to add 5 list items to it with the text "Item 1", "Item 2", etc.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use a loop, <code>document.createElement("li")</code>, and <code>ul.appendChild(li)</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">🖱️ Events</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 26: Button Click</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create a button. When clicked, it should log "Button clicked!" to the console.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>button.addEventListener("click", () => console.log("Button clicked!"));</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 27: Input Value</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create an input field and a button. When the button is clicked, log the value of the input to the console.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>const value = input.value;</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 28: Counter</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create a counter that starts at 0. Add a button that increases the counter by 1 each time it's clicked. Display the current count on the page.</p>
+    <div class="hint">
+      <strong>Hint:</strong> Use a variable <code>let count = 0;</code> and update a paragraph's <code>textContent</code> on each click.
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 29: Keyboard Event</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create an input field. Log to the console every key that the user presses while typing.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>input.addEventListener("keydown", (e) => console.log(e.key));</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">💾 localStorage</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Exercise 30: Save and Load Name</h3>
+    <span class="difficulty easy">Easy</span>
+    <p><strong>Task:</strong> Create an input field and a "Save" button. When clicked, save the input value to localStorage. When the page loads, display the saved name if it exists.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>localStorage.setItem("name", value)</code> and <code>localStorage.getItem("name")</code>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 31: Save Array to localStorage</h3>
+    <span class="difficulty medium">Medium</span>
+    <p><strong>Task:</strong> Create a simple todo list. When the user adds a task, save the entire array to localStorage using JSON. When the page loads, load and display the saved tasks.</p>
+    <div class="hint">
+      <strong>Hint:</strong> <code>localStorage.setItem("tasks", JSON.stringify(tasks))</code> and <code>JSON.parse(localStorage.getItem("tasks"))</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section-title">🏆 Challenge Projects</h2>
+  <!-- ═══════════════════════════════════════════ -->
+
+  <div class="exercise">
+    <h3>Challenge 1: Number Guessing Game</h3>
+    <span class="difficulty hard">Hard</span>
+    <p><strong>Task:</strong> Build a game where the computer picks a random number between 1-100. The user guesses, and the program says "too high", "too low", or "correct!".</p>
+    <ul class="task-list">
+      <li>Generate random number: <code>Math.floor(Math.random() * 100) + 1</code></li>
+      <li>Use an input field and button</li>
+      <li>Keep track of number of guesses</li>
+      <li>Show feedback after each guess</li>
+    </ul>
+  </div>
+
+  <div class="exercise">
+    <h3>Challenge 2: Shopping Cart</h3>
+    <span class="difficulty hard">Hard</span>
+    <p><strong>Task:</strong> Build a simple shopping cart where users can:</p>
+    <ul class="task-list">
+      <li>Add items with name and price</li>
+      <li>Display all items in a list</li>
+      <li>Remove items</li>
+      <li>Show the total price</li>
+      <li>Save the cart to localStorage</li>
+    </ul>
+  </div>
+
+  <div class="exercise">
+    <h3>Challenge 3: Quiz App</h3>
+    <span class="difficulty hard">Hard</span>
+    <p><strong>Task:</strong> Build a quiz with 5 multiple-choice questions. Features:</p>
+    <ul class="task-list">
+      <li>Show one question at a time</li>
+      <li>Track the user's score</li>
+      <li>Show results at the end</li>
+      <li>Add a "Restart Quiz" button</li>
+    </ul>
+  </div>
+
+  <div class="exercise">
+    <h3>Challenge 4: Weather Dashboard (Bonus)</h3>
+    <span class="difficulty hard">Hard</span>
+    <p><strong>Task:</strong> Create a weather app that:</p>
+    <ul class="task-list">
+      <li>Takes a city name as input</li>
+      <li>Fetches weather data from a free API (like OpenWeatherMap)</li>
+      <li>Displays temperature, conditions, and an icon</li>
+      <li>Saves the last searched city to localStorage</li>
+    </ul>
+    <div class="hint">
+      <strong>Hint:</strong> Use <code>fetch()</code> to get data from an API. This requires learning about Promises and async/await.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <div style="margin-top:60px; padding:24px; background:#1e293b; border-radius:12px; max-width:760px;">
+    <h3 style="color:#86efac; margin-bottom:12px;">🎯 How to Use These Exercises</h3>
+    <ol style="color:#cbd5e1; line-height:1.8; padding-left:20px;">
+      <li>Start from Exercise 1 and work your way down</li>
+      <li>Try to solve each one WITHOUT looking at the hint first</li>
+      <li>If you're stuck for more than 10 minutes, read the hint</li>
+      <li>Test your code in the browser console or create a separate HTML file</li>
+      <li>Don't skip exercises — each one builds on previous concepts</li>
+      <li>After finishing all exercises, try the challenge projects</li>
+    </ol>
+  </div>
+
+</body>
+</html>

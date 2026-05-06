@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Conditionals – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>🔀 Conditionals</h1>
+  <p class="intro">Conditionals let your code make decisions — run different code depending on whether something is true or false.</p>
+
+  <div class="card">
+    <h2>1. if statement</h2>
+    <pre><code>const age = 20;
+
+if (age >= 18) {
+  console.log("You are an adult.");
+}
+// Only runs if the condition is true</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. if / else</h2>
+    <pre><code>const age = 15;
+
+if (age >= 18) {
+  console.log("You can vote.");
+} else {
+  console.log("You are too young to vote.");
+}
+// else runs when the condition is false</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. if / else if / else — multiple conditions</h2>
+    <pre><code>const score = 72;
+
+if (score >= 90) {
+  console.log("Grade: A");
+} else if (score >= 80) {
+  console.log("Grade: B");
+} else if (score >= 70) {
+  console.log("Grade: C");
+} else {
+  console.log("Grade: F");
+}
+// Output: Grade: C</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. switch statement — for exact matches</h2>
+    <pre><code>const day = "Monday";
+
+switch (day) {
+  case "Monday":
+    console.log("Start of the week!");
+    break;
+  case "Friday":
+    console.log("Almost weekend!");
+    break;
+  case "Saturday":
+  case "Sunday":
+    console.log("It's the weekend!");
+    break;
+  default:
+    console.log("A regular day.");
+}
+// Output: Start of the week!</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. Ternary Operator — short if/else in one line</h2>
+    <pre><code>const age = 20;
+
+// condition ? valueIfTrue : valueIfFalse
+const status = age >= 18 ? "adult" : "minor";
+console.log(status); // "adult"
+
+// Same as:
+// if (age >= 18) { status = "adult" } else { status = "minor" }</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Grade Calculator</h2>
+    <input type="number" id="scoreInput" placeholder="Enter score (0–100)" min="0" max="100"/>
+    <button onclick="getGrade()">Get Grade</button>
+    <p id="output" class="output"></p>
+  </div>
+
+  <script>
+    function getGrade() {
+      const score  = parseInt(document.getElementById("scoreInput").value);
+      const output = document.getElementById("output");
+
+      if (isNaN(score) || score < 0 || score > 100) {
+        output.textContent = "Please enter a number between 0 and 100.";
+        return;
+      }
+
+      let grade;
+      let emoji;
+
+      if (score >= 90) {
+        grade = "A"; emoji = "🏆";
+      } else if (score >= 80) {
+        grade = "B"; emoji = "🎉";
+      } else if (score >= 70) {
+        grade = "C"; emoji = "👍";
+      } else if (score >= 60) {
+        grade = "D"; emoji = "😐";
+      } else {
+        grade = "F"; emoji = "😢";
+      }
+
+      output.textContent = "Score: " + score + " → Grade: " + grade + " " + emoji;
+    }
+  </script>
+
+</body>
+</html>

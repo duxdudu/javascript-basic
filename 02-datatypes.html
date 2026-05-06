@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Data Types – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>🔢 Data Types</h1>
+  <p class="intro">Every value in JavaScript has a type. Knowing the types helps you understand what you can do with a value.</p>
+
+  <div class="card">
+    <h2>1. String — text</h2>
+    <pre><code>const firstName = "Alice";          // double quotes
+const lastName  = 'Smith';          // single quotes — same thing
+const greeting  = `Hello, ${firstName}!`; // template literal (backtick)
+
+console.log(greeting);   // Hello, Alice!
+console.log(firstName.length); // 5  — number of characters
+console.log(firstName.toUpperCase()); // ALICE</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Number — integers and decimals</h2>
+    <pre><code>const age    = 25;       // whole number
+const price  = 9.99;     // decimal
+const result = 10 / 3;   // 3.3333...
+
+console.log(typeof age); // "number"
+
+// Useful number methods
+console.log(Math.round(result));  // 3
+console.log(Math.floor(9.9));     // 9
+console.log(Math.ceil(9.1));      // 10
+console.log(Math.max(5, 10, 3));  // 10</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Boolean — true or false</h2>
+    <pre><code>const isLoggedIn = true;
+const hasError   = false;
+
+console.log(isLoggedIn); // true
+console.log(typeof isLoggedIn); // "boolean"
+
+// Booleans come from comparisons
+const isAdult = age >= 18;  // true if age is 18 or more
+console.log(isAdult); // true (age is 25)</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. null — intentionally empty</h2>
+    <pre><code>let selectedUser = null; // we haven't chosen a user yet
+
+// Later we assign a real value
+selectedUser = "Alice";
+console.log(selectedUser); // Alice</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. undefined — not yet assigned</h2>
+    <pre><code>let score;               // declared but no value given
+console.log(score);      // undefined
+
+function greet(name) {
+  console.log(name);     // undefined if called without argument
+}
+greet(); // undefined</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. Array — a list of values</h2>
+    <pre><code>const fruits = ["apple", "banana", "cherry"];
+
+console.log(fruits[0]);      // "apple"  (index starts at 0)
+console.log(fruits.length);  // 3
+console.log(fruits[fruits.length - 1]); // "cherry" — last item</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>7. Object — grouped data</h2>
+    <pre><code>const person = {
+  name: "Alice",
+  age: 25,
+  isStudent: true
+};
+
+console.log(person.name);      // "Alice"
+console.log(person["age"]);    // 25  — bracket notation also works</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>8. typeof — check a type</h2>
+    <pre><code>console.log(typeof "hello");    // "string"
+console.log(typeof 42);         // "number"
+console.log(typeof true);       // "boolean"
+console.log(typeof undefined);  // "undefined"
+console.log(typeof null);       // "object"  ← known JS quirk
+console.log(typeof []);         // "object"
+console.log(typeof {});         // "object"</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Check a value's type</h2>
+    <input type="text" id="valueInput" placeholder='Try: 42  or  "hello"  or  true'/>
+    <button onclick="checkType()">Check Type</button>
+    <p id="output" class="output">jlskdlsdkslkd</p>
+  </div>
+
+  <script>
+    function checkType() {
+      const raw    = document.getElementById("valueInput").value.trim();
+      const output = document.getElementById("output");
+
+      // We use eval carefully here just for demo purposes
+      try {
+        const value = eval(raw);
+        output.textContent = 'typeof ' + raw + ' → "' + typeof value + '"';
+        output.style.color = "#86efac";
+      } catch (e) {
+        output.textContent = "Could not evaluate. Try: 42, true, or \"hello\"";
+        output.style.color = "#fca5a5";
+      }
+    }
+  </script>
+
+</body>
+</html>

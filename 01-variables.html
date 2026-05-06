@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Variables – JS Basics</title>
+    <link rel="stylesheet" href="shared.css" />
+  </head>
+  <body>
+    <a class="back" href="index.html">← Back to Index</a>
+    <h1>📦 Variables</h1>
+    <p class="intro">
+      A variable is a named container that holds a value. JavaScript has three
+      ways to create variables.
+    </p>
+
+    <!-- ── var ── -->
+    <div class="card">
+      <h2>1. <code>var</code> — the old way</h2>
+      <p>
+        <code>var</code> was the original way. It works, but has quirks (it
+        ignores block scope). Avoid it in new code.
+      </p>
+      <pre><code>var name = "Alice";
+                  var age  = 25;
+                  console.log(name); // Alice</code></pre>
+    </div>
+
+    <!-- ── let ── -->
+    <div class="card">
+      <h2>2. <code>let</code> — use this for values that change</h2>
+      <p><code>let</code> creates a variable you can reassign later.</p>
+      <pre><code>let score = 0;
+                score = 10;       // ✅ allowed — we changed it
+                score = score + 5;
+                console.log(score); // 15</code></pre>
+    </div>
+
+    <!-- ── const ── -->
+    <div class="card">
+      <h2>3. <code>const</code> — use this for values that stay the same</h2>
+      <p>
+        <code>const</code> creates a variable you cannot reassign. Use it by
+        default.
+      </p>
+      <pre><code>const PI = 3.14159;
+        // PI = 3; ❌ Error — cannot reassign a const
+
+        const userName = "Bob";
+        console.log(userName); // Bob</code></pre>
+    </div>
+
+    <!-- ── naming rules ── -->
+    <div class="card">
+      <h2>4. Naming Rules</h2>
+      <pre><code>
+        // ✅ Good names
+              let firstName = "Alice";   // camelCase — standard in JS
+              let totalScore = 100;
+              const MAX_SIZE = 50;       // ALL_CAPS for true constants
+
+              // ❌ Bad names
+              // let 1name = "x";        // cannot start with a number
+              // let my-name = "x";      // hyphens not allowed
+              // let let = "x";          // reserved word</code></pre>
+    </div>
+
+    <!-- ── live demo ── -->
+    <div class="card demo-card">
+      <h2>🧪 Live Demo</h2>
+      <p>Type your name and click the button.</p>
+      <input type="text" id="nameInput" placeholder="Enter your name" />
+      <button onclick="greet()">Say Hello</button>
+      <p id="output" class="output"></p>
+      <p></p>
+    </div>
+
+    <script>
+      function greet() {
+        // const because we won't change this value
+        const input = document.getElementById("nameInput");
+        const output = document.getElementById("output");
+
+        // let because we build the message step by step
+        let name = input.value.trim();
+
+        if (name === "") {
+          name = "stranger";
+        }
+
+        const message = "Hello, " + name + "! 👋";
+        output.textContent = message;
+      }
+    </script>
+  </body>
+</html>

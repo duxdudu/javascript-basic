@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>localStorage – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>💾 localStorage</h1>
+  <p class="intro">localStorage lets you save data in the browser. The data stays there even after the page is refreshed or the browser is closed.</p>
+
+  <div class="card">
+    <h2>1. Saving data — setItem</h2>
+    <pre><code>// localStorage.setItem("key", "value")
+// Both key and value must be strings
+
+localStorage.setItem("username", "Alice");
+localStorage.setItem("theme", "dark");
+localStorage.setItem("score", "100");</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Reading data — getItem</h2>
+    <pre><code>const username = localStorage.getItem("username");
+console.log(username); // "Alice"
+
+// If the key doesn't exist, you get null
+const missing = localStorage.getItem("nothing");
+console.log(missing); // null</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Removing data</h2>
+    <pre><code>// Remove one item
+localStorage.removeItem("theme");
+
+// Remove everything
+localStorage.clear();</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. Saving objects and arrays — use JSON</h2>
+    <p>localStorage only stores strings. To save objects or arrays, convert them with <code>JSON.stringify</code> and <code>JSON.parse</code>.</p>
+    <pre><code>// Saving an object
+const user = { name: "Alice", age: 25 };
+localStorage.setItem("user", JSON.stringify(user));
+
+// Reading it back
+const saved = localStorage.getItem("user");
+const parsed = JSON.parse(saved);
+console.log(parsed.name); // "Alice"
+
+// Saving an array
+const tasks = ["Buy milk", "Read book", "Exercise"];
+localStorage.setItem("tasks", JSON.stringify(tasks));
+
+// Reading it back
+const savedTasks = JSON.parse(localStorage.getItem("tasks"));
+console.log(savedTasks[0]); // "Buy milk"</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. Safe pattern — handle missing data</h2>
+    <pre><code>function loadTasks() {
+  const saved = localStorage.getItem("tasks");
+
+  // If nothing saved yet, return an empty array
+  if (saved === null) {
+    return [];
+  }
+
+  return JSON.parse(saved); // convert string back to array
+}
+
+function saveTasks(tasks) {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Usage
+let tasks = loadTasks();
+tasks.push("New task");
+saveTasks(tasks);</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. How it's used in the Task Manager</h2>
+    <pre><code>// From app.js in the Task Manager project:
+
+// Load tasks when page opens
+function loadTasks() {
+  const saved = localStorage.getItem("tasks");
+  tasks = saved ? JSON.parse(saved) : [];
+}
+
+// Save tasks every time something changes
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Called on page load
+loadTasks();
+renderTasks();</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Persistent Note</h2>
+    <p style="color:#94a3b8; font-size:0.85rem; margin-bottom:10px;">
+      Type a note below. It will be saved automatically and survive a page refresh.
+    </p>
+    <textarea
+      id="noteArea"
+      placeholder="Type your note here..."
+      style="
+        width:100%;
+        height:100px;
+        background:#0f172a;
+        color:#e2e8f0;
+        border:1px solid #334155;
+        border-radius:8px;
+        padding:10px;
+        font-size:0.9rem;
+        resize:vertical;
+        outline:none;
+      "
+    ></textarea>
+    <div style="display:flex; gap:8px; margin-top:8px;">
+      <button onclick="saveNote()">💾 Save Note</button>
+      <button onclick="clearNote()" style="background:#475569;">🗑 Clear</button>
+    </div>
+    <p id="noteStatus" class="output" style="margin-top:8px;"></p>
+  </div>
+
+  <script>
+    const noteArea   = document.getElementById("noteArea");
+    const noteStatus = document.getElementById("noteStatus");
+
+    // Load saved note when page opens
+    const savedNote = localStorage.getItem("myNote");
+    if (savedNote) {
+      noteArea.value = savedNote;
+      noteStatus.textContent = "Note loaded from localStorage ✅";
+    }
+
+    function saveNote() {
+      const text = noteArea.value;
+      localStorage.setItem("myNote", text);
+      noteStatus.textContent = "Note saved! Refresh the page — it will still be here ✅";
+    }
+
+    function clearNote() {
+      noteArea.value = "";
+      localStorage.removeItem("myNote");
+      noteStatus.textContent = "Note cleared from localStorage 🗑";
+    }
+
+    // Auto-save as user types
+    noteArea.addEventListener("input", function() {
+      localStorage.setItem("myNote", noteArea.value);
+      noteStatus.textContent = "Auto-saved...";
+    });
+  </script>
+
+</body>
+</html>

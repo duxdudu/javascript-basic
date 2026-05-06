@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>DOM Manipulation – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>🌐 DOM Manipulation</h1>
+  <p class="intro">The DOM (Document Object Model) is how JavaScript reads and changes what's on the page — text, styles, elements, everything.</p>
+
+  <div class="card">
+    <h2>1. Selecting elements</h2>
+    <pre><code>
+      // By ID — returns one element
+                const btn = document.getElementById("myBtn");
+
+                // By CSS selector — returns the FIRST match
+                const title = document.querySelector("h1");
+                const box   = document.querySelector(".card");
+                const input = document.querySelector("#nameInput");
+
+                // By CSS selector — returns ALL matches (a NodeList)
+                const allBtns = document.querySelectorAll("button");
+                const allCards = document.querySelectorAll(".card");</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Reading and changing text</h2>
+    <pre><code>const heading = document.querySelector("h1");
+
+// Read the text
+console.log(heading.textContent); // "DOM Manipulation"
+
+// Change the text
+heading.textContent = "Hello World!";
+
+// innerHTML lets you set HTML tags too
+const box = document.querySelector("#box");
+box.innerHTML = "&lt;strong&gt;Bold text&lt;/strong&gt;";</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Changing styles</h2>
+    <pre><code>const box = document.querySelector("#box");
+
+// Change CSS directly
+box.style.color           = "red";
+box.style.backgroundColor = "yellow";
+box.style.fontSize        = "20px";
+box.style.display         = "none";   // hide
+box.style.display         = "block";  // show</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. Adding and removing CSS classes</h2>
+    <pre><code>const btn = document.querySelector("#myBtn");
+
+btn.classList.add("active");       // add a class
+btn.classList.remove("active");    // remove a class
+btn.classList.toggle("active");    // add if missing, remove if present
+btn.classList.contains("active");  // true or false — check if it has the class</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. Creating and adding new elements</h2>
+    <pre><code>// Create a new element
+const li = document.createElement("li");
+li.textContent = "New item";
+
+// Add it to an existing element
+const list = document.querySelector("#myList");
+list.appendChild(li);   // add at the END
+
+// Remove an element
+li.remove();</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. Reading input values</h2>
+    <pre><code>const input = document.querySelector("#nameInput");
+
+// Read what the user typed
+const value = input.value;
+console.log(value);
+
+// Clear the input
+input.value = "";
+
+// Focus the input (put cursor in it)
+input.focus();</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — DOM Playground</h2>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+      <button onclick="changeText()">Change Text</button>
+      <button onclick="changeColor()">Change Color</button>
+      <button onclick="toggleBox()">Toggle Box</button>
+      <button onclick="addItem()">Add List Item</button>
+    </div>
+
+    <div id="demoBox" style="
+      background:#1e293b;
+      border:2px solid #334155;
+      border-radius:8px;
+      padding:16px;
+      margin-bottom:12px;
+    ">
+      <p id="demoText">I am a paragraph. Click the buttons above!</p>
+    </div>
+
+    <ul id="demoList" style="padding-left:20px; color:#94a3b8;"></ul>
+  </div>
+
+  <script>
+    let colorIndex = 0;
+    const colors   = ["#6366f1", "#ec4899", "#f59e0b", "#10b981", "#3b82f6"];
+    let itemCount  = 0;
+    let isVisible  = true;
+
+    function changeText() {
+      const p = document.getElementById("demoText");
+      p.textContent = "Text changed at " + new Date().toLocaleTimeString();
+    }
+
+    function changeColor() {
+      const box = document.getElementById("demoBox");
+      box.style.borderColor = colors[colorIndex % colors.length];
+      box.style.color       = colors[colorIndex % colors.length];
+      colorIndex++;
+    }
+
+    function toggleBox() {
+      const box = document.getElementById("demoBox");
+      isVisible = !isVisible;
+      box.style.display = isVisible ? "block" : "none";
+    }
+
+    function addItem() {
+      itemCount++;
+      const li   = document.createElement("li");
+      li.textContent = "Item " + itemCount + " added at " + new Date().toLocaleTimeString();
+      document.getElementById("demoList").appendChild(li);
+    }
+  </script>
+
+</body>
+</html>

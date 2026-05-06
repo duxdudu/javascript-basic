@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+    <div>
+      <h1>live demo</h1>
+      <p>type your name and click the button</p>
+      <input type="text" id="nameInput" placeholder="Your name here" />
+      <button onclick="greet()" id="mybutton">Say Hello</button>
+      <p id="output"></p>
+      <p id="description">This is a simple greeting demo.</p>
+    </div>
+    <script>
+      function greet() {
+        const input = document.getElementById("nameInput");
+        const output = document.getElementById("output");
+        const description = document.getElementById("description");
+        const button = document.getElementById("mybutton");
+        const name = input.value.trim();
+        description.textContent = "You entered: " + name;
+
+        if (name === "") {
+          output.textContent = "Hello, stranger! 👋";
+        } else {
+          output.textContent = "Hello, " + name + "! 👋";
+        }
+
+        // Press Enter inside input
+      }
+
+      const myName = "Alice";
+      const myAge = 25;
+
+      console.log("Hello from Node!");
+      console.log("My name is:", myName);
+      console.log("My age is:", myAge);
+    </script>
+    <script>
+        const students = ["kali", "mali", "sali"];
+        const status = students.forEach((student) => console.log(student));
+    </script>
+    <script>
+        
+    </script>
+  </body>
+</html>

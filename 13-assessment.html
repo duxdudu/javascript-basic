@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Assessment – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .assessment-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .question-card {
+      background: #1e293b;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .question-card.correct {
+      border-color: #10b981;
+      background: #064e3b;
+    }
+    .question-card.incorrect {
+      border-color: #ef4444;
+      background: #7f1d1d;
+    }
+    .question-number {
+      font-size: 0.85rem;
+      color: #6366f1;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .question-text {
+      font-size: 1.1rem;
+      color: #f1f5f9;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .code-block {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      font-family: "Cascadia Code", monospace;
+      font-size: 0.9rem;
+      color: #7dd3fc;
+      overflow-x: auto;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option {
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    .option:hover {
+      border-color: #6366f1;
+      background: #1e293b;
+    }
+    .option.selected {
+      border-color: #6366f1;
+      background: #312e81;
+      color: #fff;
+    }
+    .option.correct-answer {
+      border-color: #10b981;
+      background: #064e3b;
+      color: #86efac;
+    }
+    .option.wrong-answer {
+      border-color: #ef4444;
+      background: #7f1d1d;
+      color: #fca5a5;
+    }
+    .option.disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    .feedback {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .feedback.show {
+      display: block;
+    }
+    .feedback.correct {
+      background: #064e3b;
+      border: 1px solid #10b981;
+      color: #86efac;
+    }
+    .feedback.incorrect {
+      background: #7f1d1d;
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+    .submit-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 32px;
+      transition: all 0.2s;
+    }
+    .submit-btn:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+    .submit-btn:disabled {
+      background: #475569;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .results {
+      background: #1e293b;
+      border: 2px solid #6366f1;
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      display: none;
+      margin-top: 32px;
+    }
+    .results.show {
+      display: block;
+    }
+    .score {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6366f1;
+      margin: 16px 0;
+    }
+    .score.pass {
+      color: #10b981;
+    }
+    .score.fail {
+      color: #ef4444;
+    }
+    .restart-btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .restart-btn:hover {
+      background: #059669;
+    }
+    .timer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1e293b;
+      border: 2px solid #6366f1;
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #6366f1;
+      z-index: 1000;
+    }
+    .timer.warning {
+      border-color: #f59e0b;
+      color: #f59e0b;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .instructions {
+      background: #1e293b;
+      border-left: 4px solid #6366f1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 32px;
+    }
+    .instructions h3 {
+      color: #818cf8;
+      margin-bottom: 12px;
+    }
+    .instructions ul {
+      color: #cbd5e1;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>📝 JavaScript Assessment</h1>
+  <p class="intro">Test your knowledge before moving to the next session. You need 40/50 correct to pass.</p>
+
+  <div class="timer" id="timer">⏱️ 45:00</div>
+
+  <div class="assessment-container">
+
+    <div class="instructions">
+      <h3>📋 Instructions</h3>
+      <ul>
+        <li>You have <strong>45 minutes</strong> to complete 50 questions</li>
+        <li>Questions cover all JavaScript basics topics</li>
+        <li>Select one answer per question</li>
+        <li>You need <strong>40 out of 50 correct</strong> to pass (80%)</li>
+        <li>Click "Submit Assessment" when done</li>
+        <li>You can retake the assessment if needed</li>
+      </ul>
+    </div>
+
+    <!-- QUESTION 1 -->
+    <div class="question-card" data-question="1">
+      <div class="question-number">Question 1 of 6</div>
+      <div class="question-text">What will be logged to the console?</div>
+      <div class="code-block">let x = 5;
+let y = x;
+y = 10;
+console.log(x);</div>
+      <div class="options">
+        <div class="option" data-answer="a">A) 5</div>
+        <div class="option" data-answer="b">B) 10</div>
+        <div class="option" data-answer="c">C) undefined</div>
+        <div class="option" data-answer="d">D) Error</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="question-card" data-question="2">
+      <div class="question-number">Question 2 of 6</div>
+      <div class="question-text">What will be logged to the console?</div>
+      <div class="code-block">const arr = [1, 2, 3];
+const newArr = arr;
+newArr.push(4);
+console.log(arr.length);</div>
+      <div class="options">
+        <div class="option" data-answer="a">A) 3</div>
+        <div class="option" data-answer="b">B) 4</div>
+        <div class="option" data-answer="c">C) undefined</div>
+        <div class="option" data-answer="d">D) Error</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="question-card" data-question="3">
+      <div class="question-number">Question 3 of 6</div>
+      <div class="question-text">What will be logged to the console?</div>
+      <div class="code-block">function greet(name = "Guest") {
+  return "Hello, " + name;
+}
+console.log(greet());</div>
+      <div class="options">
+        <div class="option" data-answer="a">A) "Hello, Guest"</div>
+        <div class="option" data-answer="b">B) "Hello, undefined"</div>
+        <div class="option" data-answer="c">C) "Hello, "</div>
+        <div class="option" data-answer="d">D) Error</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="question-card" data-question="4">
+      <div class="question-number">Question 4 of 6</div>
+      <div class="question-text">What will be logged to the console?</div>
+      <div class="code-block">const numbers = [1, 2, 3, 4, 5];
+const result = numbers.filter(n => n > 3);
+console.log(result.length);</div>
+      <div class="options">
+        <div class="option" data-answer="a">A) 2</div>
+        <div class="option" data-answer="b">B) 3</div>
+        <div class="option" data-answer="c">C) 5</div>
+        <div class="option" data-answer="d">D) undefined</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="question-card" data-question="5">
+      <div class="question-number">Question 5 of 6</div>
+      <div class="question-text">What will be logged to the console?</div>
+      <div class="code-block">const person = { name: "Alice", age: 25 };
+const copy = { ...person };
+copy.age = 30;
+console.log(person.age);</div>
+      <div class="options">
+        <div class="option" data-answer="a">A) 25</div>
+        <div class="option" data-answer="b">B) 30</div>
+        <div class="option" data-answer="c">C) undefined</div>
+        <div class="option" data-answer="d">D) Error</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- QUESTION 6 -->
+    <div class="question-card" data-question="6">
+      <div class="question-number">Question 6 of 6</div>
+      <div class="question-text">What will be logged to the console?</div>
+      <div class="code-block">let count = 0;
+for (let i = 0; i < 5; i++) {
+  if (i === 2) continue;
+  count++;
+}
+console.log(count);</div>
+      <div class="options">
+        <div class="option" data-answer="a">A) 4</div>
+        <div class="option" data-answer="b">B) 5</div>
+        <div class="option" data-answer="c">C) 2</div>
+        <div class="option" data-answer="d">D) 3</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn">Submit Assessment</button>
+
+    <div class="results" id="results">
+      <h2 style="color:#f1f5f9; margin-bottom:12px;">Assessment Complete!</h2>
+      <div class="score" id="scoreDisplay">0/6</div>
+      <p id="resultMessage" style="color:#cbd5e1; font-size:1.1rem; margin-bottom:8px;"></p>
+      <p id="resultDetail" style="color:#94a3b8; font-size:0.9rem;"></p>
+      <button class="restart-btn" onclick="location.reload()">Retake Assessment</button>
+      <a href="index.html" style="display:inline-block; margin-top:16px; color:#6366f1; text-decoration:none;">← Back to Index</a>
+    </div>
+
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════
+    // ASSESSMENT LOGIC
+    // ═══════════════════════════════════════════
+
+    // Correct answers
+    const correctAnswers = {
+      1: "a",  // x remains 5 (primitives are copied by value)
+      2: "b",  // arr.length is 4 (arrays are copied by reference)
+      3: "a",  // Default parameter is used
+      4: "a",  // filter returns [4, 5], length is 2
+      5: "a",  // Spread creates shallow copy, person.age stays 25
+      6: "a"   // Loop runs 5 times but skips i=2, so count is 4
+    };
+
+    // Explanations
+    const explanations = {
+      1: {
+        correct: "✅ Correct! Primitives (numbers, strings, booleans) are copied by value. Changing y doesn't affect x.",
+        incorrect: "❌ Incorrect. Primitives are copied by value, not by reference. x remains 5."
+      },
+      2: {
+        correct: "✅ Correct! Arrays are copied by reference. Both arr and newArr point to the same array in memory.",
+        incorrect: "❌ Incorrect. Arrays are reference types. newArr and arr point to the same array, so pushing to newArr affects arr."
+      },
+      3: {
+        correct: "✅ Correct! When no argument is passed, the default parameter value 'Guest' is used.",
+        incorrect: "❌ Incorrect. The function has a default parameter (name = 'Guest'), so it returns 'Hello, Guest'."
+      },
+      4: {
+        correct: "✅ Correct! filter returns [4, 5] (numbers greater than 3), which has length 2.",
+        incorrect: "❌ Incorrect. filter keeps only elements where n > 3, which are 4 and 5. That's 2 elements."
+      },
+      5: {
+        correct: "✅ Correct! The spread operator creates a shallow copy. Changing copy.age doesn't affect person.age.",
+        incorrect: "❌ Incorrect. The spread operator {...person} creates a new object. person.age remains 25."
+      },
+      6: {
+        correct: "✅ Correct! The loop runs 5 times (i = 0,1,2,3,4) but skips incrementing count when i === 2, so count is 4.",
+        incorrect: "❌ Incorrect. continue skips the rest of the loop body for i=2, but the loop continues. count++ runs 4 times (0,1,3,4)."
+      }
+    };
+
+    // User answers
+    const userAnswers = {};
+
+    // Timer
+    let timeLeft = 15 * 60; // 15 minutes in seconds
+    let timerInterval;
+
+    // ═══════════════════════════════════════════
+    // OPTION SELECTION
+    // ═══════════════════════════════════════════
+
+    document.querySelectorAll(".option").forEach(option => {
+      option.addEventListener("click", function() {
+        const card = this.closest(".question-card");
+        const questionNum = card.dataset.question;
+        
+        // Don't allow changes after submission
+        if (card.classList.contains("correct") || card.classList.contains("incorrect")) {
+          return;
+        }
+
+        // Remove previous selection
+        card.querySelectorAll(".option").forEach(opt => {
+          opt.classList.remove("selected");
+        });
+
+        // Mark this option as selected
+        this.classList.add("selected");
+        userAnswers[questionNum] = this.dataset.answer;
+      });
+    });
+
+    // ═══════════════════════════════════════════
+    // SUBMIT ASSESSMENT
+    // ═══════════════════════════════════════════
+
+    document.getElementById("submitBtn").addEventListener("click", function() {
+      // Check if all questions are answered
+      if (Object.keys(userAnswers).length < 6) {
+        alert("Please answer all questions before submitting.");
+        return;
+      }
+
+      // Stop timer
+      clearInterval(timerInterval);
+
+      // Disable submit button
+      this.disabled = true;
+      this.textContent = "Submitted";
+
+      // Calculate score
+      let score = 0;
+
+      // Check each answer
+      for (let q = 1; q <= 6; q++) {
+        const card = document.querySelector(`[data-question="${q}"]`);
+        const userAnswer = userAnswers[q];
+        const correctAnswer = correctAnswers[q];
+        const isCorrect = userAnswer === correctAnswer;
+
+        if (isCorrect) {
+          score++;
+          card.classList.add("correct");
+        } else {
+          card.classList.add("incorrect");
+        }
+
+        // Show feedback
+        const feedback = card.querySelector(".feedback");
+        feedback.textContent = isCorrect ? explanations[q].correct : explanations[q].incorrect;
+        feedback.classList.add("show", isCorrect ? "correct" : "incorrect");
+
+        // Highlight correct/wrong answers
+        card.querySelectorAll(".option").forEach(opt => {
+          opt.classList.add("disabled");
+          
+          if (opt.dataset.answer === correctAnswer) {
+            opt.classList.add("correct-answer");
+          }
+          
+          if (opt.dataset.answer === userAnswer && !isCorrect) {
+            opt.classList.add("wrong-answer");
+          }
+        });
+      }
+
+      // Show results
+      showResults(score);
+
+      // Save to localStorage
+      saveResult(score);
+    });
+
+    // ═══════════════════════════════════════════
+    // SHOW RESULTS
+    // ═══════════════════════════════════════════
+
+    function showResults(score) {
+      const results = document.getElementById("results");
+      const scoreDisplay = document.getElementById("scoreDisplay");
+      const resultMessage = document.getElementById("resultMessage");
+      const resultDetail = document.getElementById("resultDetail");
+
+      const passed = score >= 4;
+      const percentage = Math.round((score / 6) * 100);
+
+      scoreDisplay.textContent = score + "/6";
+      scoreDisplay.classList.add(passed ? "pass" : "fail");
+
+      if (passed) {
+        resultMessage.textContent = "🎉 Congratulations! You passed!";
+        resultDetail.textContent = `You scored ${percentage}%. You're ready for the next session.`;
+      } else {
+        resultMessage.textContent = "📚 Keep practicing!";
+        resultDetail.textContent = `You scored ${percentage}%. Review the topics and try again. You need 4/6 to pass.`;
+      }
+
+      results.classList.add("show");
+      results.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // ═══════════════════════════════════════════
+    // TIMER
+    // ═══════════════════════════════════════════
+
+    function startTimer() {
+      const timerEl = document.getElementById("timer");
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerEl.textContent = `⏱️ ${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+        // Warning when 2 minutes left
+        if (timeLeft <= 120) {
+          timerEl.classList.add("warning");
+        }
+
+        // Time's up
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          timerEl.textContent = "⏱️ Time's Up!";
+          document.getElementById("submitBtn").click();
+        }
+      }, 1000);
+    }
+
+    // ═══════════════════════════════════════════
+    // SAVE RESULT TO LOCALSTORAGE
+    // ═══════════════════════════════════════════
+
+    function saveResult(score) {
+      const results = JSON.parse(localStorage.getItem("assessmentResults") || "[]");
+      results.push({
+        date: new Date().toISOString(),
+        score: score,
+        total: 6,
+        passed: score >= 4
+      });
+      localStorage.setItem("assessmentResults", JSON.stringify(results));
+    }
+
+    // ═══════════════════════════════════════════
+    // START
+    // ═══════════════════════════════════════════
+
+    startTimer();
+
+  </script>
+
+</body>
+</html>

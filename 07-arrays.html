@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Arrays – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>📋 Arrays</h1>
+  <p class="intro">An array is an ordered list of values. It's one of the most used data structures in JavaScript.</p>
+
+  <div class="card">
+    <h2>1. Creating an array</h2>
+    <pre><code>const fruits  = ["apple", "banana", "cherry"];
+const numbers = [10, 20, 30, 40];
+const mixed   = ["Alice", 25, true]; // can mix types
+
+console.log(fruits);    // ["apple", "banana", "cherry"]
+console.log(fruits[0]); // "apple"   — index starts at 0
+console.log(fruits[2]); // "cherry"
+console.log(fruits.length); // 3</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Adding and removing items</h2>
+    <pre><code>const items = ["a", "b", "c"];
+
+items.push("d");      // add to END   → ["a","b","c","d"]
+items.unshift("z");   // add to START → ["z","a","b","c","d"]
+
+items.pop();          // remove from END   → ["z","a","b","c"]
+items.shift();        // remove from START → ["a","b","c"]
+
+console.log(items); // ["a","b","c"]</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Looping through an array</h2>
+    <pre><code>const colors = ["red", "green", "blue"];
+
+// for loop
+for (let i = 0; i < colors.length; i++) {
+  console.log(colors[i]);
+}
+
+// for...of (cleaner)
+for (const color of colors) {
+  console.log(color);
+}
+
+// forEach
+colors.forEach(function(color) {
+  console.log(color);
+});</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. map — transform every item</h2>
+    <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// Double every number
+const doubled = numbers.map(function(n) {
+  return n * 2;
+});
+
+console.log(doubled); // [2, 4, 6, 8, 10]
+// Original array is NOT changed
+console.log(numbers); // [1, 2, 3, 4, 5]</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. filter — keep only matching items</h2>
+    <pre><code>const numbers = [1, 2, 3, 4, 5, 6];
+
+const evens = numbers.filter(function(n) {
+  return n % 2 === 0; // keep if remainder is 0
+});
+
+console.log(evens); // [2, 4, 6]
+
+// Real-world example — filter completed tasks
+const tasks = [
+  { text: "Buy milk",  completed: true  },
+  { text: "Read book", completed: false },
+  { text: "Exercise",  completed: true  },
+];
+
+const done = tasks.filter(task => task.completed === true);
+console.log(done.length); // 2</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. find — get the first match</h2>
+    <pre><code>const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob"   },
+  { id: 3, name: "Carol" },
+];
+
+const user = users.find(function(u) {
+  return u.id === 2;
+});
+
+console.log(user); // { id: 2, name: "Bob" }</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>7. includes — check if a value exists</h2>
+    <pre><code>const fruits = ["apple", "banana", "cherry"];
+
+console.log(fruits.includes("banana")); // true
+console.log(fruits.includes("grape"));  // false</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>8. join and split</h2>
+    <pre><code>const words = ["Hello", "World", "JS"];
+
+// Array → String
+const sentence = words.join(" ");
+console.log(sentence); // "Hello World JS"
+
+// String → Array
+const parts = "a,b,c,d".split(",");
+console.log(parts); // ["a","b","c","d"]</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Array Builder</h2>
+    <input type="text" id="itemInput" placeholder="Type an item and press Add"/>
+    <button onclick="addItem()">Add</button>
+    <button onclick="removeItem()">Remove Last</button>
+    <p id="output" class="output"></p>
+    <p id="listDisplay" style="color:#94a3b8; font-size:0.85rem; margin-top:8px;"></p>
+  </div>
+
+  <script>
+    const myArray = [];
+
+    function render() {
+      const output      = document.getElementById("output");
+      const listDisplay = document.getElementById("listDisplay");
+
+      output.textContent      = "Array: [" + myArray.join(", ") + "]";
+      listDisplay.textContent = "Length: " + myArray.length;
+    }
+
+    function addItem() {
+      const input = document.getElementById("itemInput");
+      const value = input.value.trim();
+      if (value === "") return;
+
+      myArray.push(value);
+      input.value = "";
+      input.focus();
+      render();
+    }
+
+    function removeItem() {
+      myArray.pop();
+      render();
+    }
+
+    render(); // show empty state on load
+  </script>
+
+</body>
+</html>

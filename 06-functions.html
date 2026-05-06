@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Functions – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>⚙️ Functions</h1>
+  <p class="intro">A function is a reusable block of code. You define it once and call it as many times as you need.</p>
+
+  <div class="card">
+    <h2>1. Declaring and calling a function</h2>
+    <pre><code>// Define the function
+function sayHello() {
+  console.log("Hello!");
+}
+
+// Call (run) the function
+sayHello(); // Hello!
+sayHello(); // Hello! — can call it many times</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Parameters — passing data in</h2>
+    <pre><code>function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+
+greet("Alice"); // Hello, Alice!
+greet("Bob");   // Hello, Bob!
+
+// Multiple parameters
+function add(a, b) {
+  console.log(a + b);
+}
+add(3, 7); // 10</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Return values — getting data out</h2>
+    <pre><code>function multiply(a, b) {
+  return a * b; // sends the result back
+}
+
+const result = multiply(4, 5);
+console.log(result); // 20
+
+// Without return, a function gives back undefined
+function noReturn() {
+  const x = 10;
+}
+console.log(noReturn()); // undefined</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. Default parameters</h2>
+    <pre><code>function greet(name = "stranger") {
+  return "Hello, " + name + "!";
+}
+
+console.log(greet("Alice")); // Hello, Alice!
+console.log(greet());        // Hello, stranger!</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. Function Expression — storing a function in a variable</h2>
+    <pre><code>const square = function(n) {
+  return n * n;
+};
+
+console.log(square(4)); // 16
+console.log(square(9)); // 81</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. Arrow Functions — shorter syntax</h2>
+    <pre><code>// Regular function
+function double(n) {
+  return n * 2;
+}
+
+// Arrow function — same thing, shorter
+const double = (n) => n * 2;
+
+// Even shorter when there's one parameter
+const double = n => n * 2;
+
+console.log(double(5)); // 10
+
+// Multi-line arrow function needs curly braces + return
+const greet = (name) => {
+  const message = "Hello, " + name;
+  return message;
+};</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>7. Functions calling other functions</h2>
+    <pre><code>function celsiusToFahrenheit(c) {
+  return (c * 9/5) + 32;
+}
+
+function showTemperature(celsius) {
+  const fahrenheit = celsiusToFahrenheit(celsius); // call another function
+  console.log(celsius + "°C = " + fahrenheit + "°F");
+}
+
+showTemperature(0);   // 0°C = 32°F
+showTemperature(100); // 100°C = 212°F</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Temperature Converter</h2>
+    <input type="number" id="tempInput" placeholder="Enter °C"/>
+    <button onclick="convert()">Convert to °F</button>
+    <p id="output" class="output"></p>
+  </div>
+
+  <script>
+    // A function that does the math
+    function celsiusToFahrenheit(c) {
+      return (c * 9 / 5) + 32;
+    }
+
+    // A function that reads the input and shows the result
+    function convert() {
+      const celsius    = parseFloat(document.getElementById("tempInput").value);
+      const output     = document.getElementById("output");
+
+      if (isNaN(celsius)) {
+        output.textContent = "Please enter a valid number.";
+        return;
+      }
+
+      const fahrenheit = celsiusToFahrenheit(celsius);
+      output.textContent = celsius + "°C = " + fahrenheit.toFixed(1) + "°F";
+    }
+  </script>
+
+</body>
+</html>

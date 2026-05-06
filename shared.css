@@ -1,0 +1,142 @@
+/* ── Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Body ── */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  padding: 32px 16px 60px;
+  line-height: 1.6;
+}
+
+/* ── Back link ── */
+.back {
+  display: inline-block;
+  color: #6366f1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+.back:hover { text-decoration: underline; }
+
+/* ── Page title ── */
+h1 {
+  font-size: 1.8rem;
+  color: #f8fafc;
+  margin-bottom: 8px;
+}
+
+/* ── Intro paragraph ── */
+.intro {
+  color: #94a3b8;
+  margin-bottom: 28px;
+  font-size: 1rem;
+  max-width: 640px;
+}
+
+/* ── Card ── */
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  max-width: 760px;
+}
+
+.card h2 {
+  font-size: 1rem;
+  color: #f1f5f9;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+/* ── Code blocks ── */
+pre {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+  font-size: 0.85rem;
+  color: #7dd3fc;
+  line-height: 1.7;
+}
+
+/* ── Demo card ── */
+.demo-card {
+  border-color: #4f46e5;
+  background: #1a1f35;
+}
+
+/* ── Inputs ── */
+input[type="text"],
+input[type="number"],
+textarea {
+  padding: 9px 13px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #6366f1;
+}
+
+/* ── Select ── */
+select {
+  padding: 9px 10px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  outline: none;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* ── Buttons ── */
+button {
+  padding: 9px 18px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 8px;
+}
+
+button:hover  { background: #4f46e5; }
+button:active { transform: scale(0.97); }
+
+/* ── Output text ── */
+.output {
+  color: #86efac;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  font-family: "Cascadia Code", "Consolas", monospace;
+  min-height: 1.4em;
+}

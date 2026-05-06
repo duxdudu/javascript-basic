@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Basics</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 40px 16px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 40px;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.15s;
+      display: block;
+    }
+
+    .card:hover {
+      border-color: #6366f1;
+      transform: translateY(-3px);
+    }
+
+    .card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .card h2 { font-size: 1.05rem; color: #f1f5f9; margin-bottom: 6px; }
+    .card p  { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .beginner { background: #166534; color: #bbf7d0; }
+    .intermediate { background: #854d0e; color: #fef08a; }
+  </style>
+</head>
+<body>
+
+  <h1>📘 JavaScript Basics</h1>
+  <p class="subtitle">Click any topic to learn with live examples</p>
+
+  <div class="grid">
+
+    <a class="card" href="01-variables.html">
+      <div class="icon">📦</div>
+      <h2>1. Variables</h2>
+      <p>var, let, const — how to store data in JavaScript. </p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="02-datatypes.html">
+      <div class="icon">🔢</div>
+      <h2>2. Data Types</h2>
+      <p>Strings, numbers, booleans, null, undefined, objects, arrays.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="03-operators.html">
+      <div class="icon">➕</div>
+      <h2>3. Operators</h2>
+      <p>Arithmetic, comparison, logical, and assignment operators.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="04-conditionals.html">
+      <div class="icon">🔀</div>
+      <h2>4. Conditionals</h2>
+      <p>if / else if / else and switch statements.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="05-loops.html">
+      <div class="icon">🔁</div>
+      <h2>5. Loops</h2>
+      <p>for, while, do-while — repeating actions.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="06-functions.html">
+      <div class="icon">⚙️</div>
+      <h2>6. Functions</h2>
+      <p>Declaring, calling, parameters, return values, arrow functions.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="07-arrays.html">
+      <div class="icon">📋</div>
+      <h2>7. Arrays</h2>
+      <p>Creating, accessing, and using array methods like push, filter, map.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="08-objects.html">
+      <div class="icon">🗂️</div>
+      <h2>8. Objects</h2>
+      <p>Key-value pairs, accessing properties, methods inside objects.</p>
+      <span class="badge beginner">Beginner</span>
+    </a>
+
+    <a class="card" href="09-dom.html">
+      <div class="icon">🌐</div>
+      <h2>9. DOM Manipulation</h2>
+      <p>Selecting elements, changing content, adding/removing classes.</p>
+      <span class="badge intermediate">Intermediate</span>
+    </a>
+
+    <a class="card" href="10-events.html">
+      <div class="icon">🖱️</div>
+      <h2>10. Events</h2>
+      <p>Click, input, keydown — responding to user actions.</p>
+      <span class="badge intermediate">Intermediate</span>
+    </a>
+
+    <a class="card" href="11-localstorage.html">
+      <div class="icon">💾</div>
+      <h2>11. localStorage</h2>
+      <p>Saving and loading data in the browser with JSON.</p>
+      <span class="badge intermediate">Intermediate</span>
+    </a>
+
+    <a class="card" href="12-exercises.html" style="border: 2px solid #6366f1;">
+      <div class="icon">✏️</div>
+      <h2>12. Practice Exercises</h2>
+      <p>31 exercises + 4 challenge projects to test everything you learned.</p>
+      <span class="badge intermediate">Practice</span>
+    </a>
+
+    <a class="card" href="assessment-50.html" style="border: 2px solid #10b981; background: #064e3b;">
+      <div class="icon">📝</div>
+      <h2>13. Final Assessment</h2>
+      <p>50 questions, 45 minutes. Pass with 40/50 (80%) to move to the next session.</p>
+      <span class="badge beginner" style="background: #10b981; color: #000;">Required</span>
+    </a>
+
+  </div>
+
+</body>
+</html>

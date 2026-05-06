@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Objects – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>🗂️ Objects</h1>
+  <p class="intro">An object groups related data together using key-value pairs. Think of it like a form with labelled fields.</p>
+
+  <div class="card">
+    <h2>1. Creating an object</h2>
+    <pre><code>const person = {
+  name: "Alice",      // key: value
+  age: 25,
+  city: "New York",
+  isStudent: false
+};
+
+console.log(person);        // the whole object
+console.log(person.name);   // "Alice"  — dot notation
+console.log(person["age"]); // 25       — bracket notation</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Adding and updating properties</h2>
+    <pre><code>const car = {
+  brand: "Toyota",
+  year: 2020
+};
+
+// Update existing property
+car.year = 2024;
+
+// Add a new property
+car.color = "blue";
+
+console.log(car);
+// { brand: "Toyota", year: 2024, color: "blue" }</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Methods — functions inside objects</h2>
+    <pre><code>const person = {
+  name: "Alice",
+  age: 25,
+
+  // A method is a function stored as a property
+  greet: function() {
+    return "Hi, I'm " + this.name + "!";
+  },
+
+  isAdult: function() {
+    return this.age >= 18;
+  }
+};
+
+console.log(person.greet());   // "Hi, I'm Alice!"
+console.log(person.isAdult()); // true</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. Looping through an object</h2>
+    <pre><code>const scores = {
+  math: 90,
+  english: 85,
+  science: 92
+};
+
+// for...in loops over the keys
+for (const subject in scores) {
+  console.log(subject + ": " + scores[subject]);
+}
+// math: 90
+// english: 85
+// science: 92
+
+// Get all keys as an array
+console.log(Object.keys(scores));   // ["math","english","science"]
+console.log(Object.values(scores)); // [90, 85, 92]</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. Array of objects — very common pattern</h2>
+    <pre><code>const students = [
+  { name: "Alice", grade: "A" },
+  { name: "Bob",   grade: "B" },
+  { name: "Carol", grade: "A" },
+];
+
+// Loop through and print each student
+students.forEach(function(student) {
+  console.log(student.name + " got a " + student.grade);
+});
+
+// Filter only A students
+const topStudents = students.filter(s => s.grade === "A");
+console.log(topStudents.length); // 2</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. Spread operator — copy or merge objects</h2>
+    <pre><code>const original = { name: "Alice", age: 25 };
+
+// Copy an object (so you don't change the original)
+const copy = { ...original };
+copy.age = 30;
+
+console.log(original.age); // 25 — unchanged
+console.log(copy.age);     // 30
+
+// Merge two objects
+const extra = { city: "Paris" };
+const merged = { ...original, ...extra };
+console.log(merged); // { name:"Alice", age:25, city:"Paris" }</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Build a Person Object</h2>
+    <input type="text" id="nameIn"  placeholder="Name"/>
+    <input type="number" id="ageIn" placeholder="Age"/>
+    <input type="text" id="cityIn"  placeholder="City"/>
+    <button onclick="buildObject()">Create Object</button>
+    <pre id="output" class="output" style="text-align:left;"></pre>
+  </div>
+
+  <script>
+    function buildObject() {
+      const name   = document.getElementById("nameIn").value.trim() || "Unknown";
+      const age    = parseInt(document.getElementById("ageIn").value) || 0;
+      const city   = document.getElementById("cityIn").value.trim() || "Unknown";
+      const output = document.getElementById("output");
+
+      // Build the object
+      const person = {
+        name: name,
+        age: age,
+        city: city,
+        isAdult: age >= 18
+      };
+
+      // Show it nicely using JSON.stringify
+      output.textContent = JSON.stringify(person, null, 2);
+    }
+  </script>
+
+</body>
+</html>

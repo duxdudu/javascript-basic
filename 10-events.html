@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Events – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>🖱️ Events</h1>
+  <p class="intro">Events are things that happen in the browser — a click, a key press, a form submit. JavaScript lets you respond to them.</p>
+
+  <div class="card">
+    <h2>1. addEventListener — the right way to handle events</h2>
+    <pre><code>const btn = document.getElementById("myBtn");
+
+// element.addEventListener("eventName", function)
+btn.addEventListener("click", function() {
+  console.log("Button was clicked!");
+});
+
+// Arrow function version
+btn.addEventListener("click", () => {
+  console.log("Clicked!");
+});</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Common event types</h2>
+    <pre><code>// Mouse events
+element.addEventListener("click",      () => { /* single click   */ });
+element.addEventListener("dblclick",   () => { /* double click   */ });
+element.addEventListener("mouseover",  () => { /* hover over     */ });
+element.addEventListener("mouseout",   () => { /* hover away     */ });
+
+// Keyboard events
+input.addEventListener("keydown",  (e) => { console.log(e.key); });
+input.addEventListener("keyup",    (e) => { console.log(e.key); });
+
+// Input / Form events
+input.addEventListener("input",    (e) => { console.log(e.target.value); });
+input.addEventListener("change",   (e) => { /* value changed    */ });
+form.addEventListener("submit",    (e) => { e.preventDefault(); /* stop page reload */ });</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. The event object</h2>
+    <pre><code>const btn = document.getElementById("myBtn");
+
+btn.addEventListener("click", function(event) {
+  // 'event' contains info about what happened
+  console.log(event.type);   // "click"
+  console.log(event.target); // the element that was clicked
+});
+
+// Keyboard event — which key was pressed?
+document.addEventListener("keydown", function(event) {
+  console.log(event.key);    // "Enter", "a", "ArrowUp", etc.
+
+  if (event.key === "Enter") {
+    console.log("Enter was pressed!");
+  }
+});</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. Preventing default behaviour</h2>
+    <pre><code>const form = document.querySelector("form");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault(); // stops the page from reloading
+
+  // Now handle the form data yourself
+  const name = document.querySelector("#name").value;
+  console.log("Submitted:", name);
+});
+
+// Also useful on links
+const link = document.querySelector("a");
+link.addEventListener("click", function(event) {
+  event.preventDefault(); // stops navigation
+  console.log("Link clicked but not followed");
+});</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. Removing an event listener</h2>
+    <pre><code>function handleClick() {
+  console.log("Clicked!");
+}
+
+btn.addEventListener("click", handleClick);
+
+// Later — remove it
+btn.removeEventListener("click", handleClick);
+// Note: must pass the same named function, not an anonymous one</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Event Explorer</h2>
+
+    <input type="text" id="eventInput" placeholder="Type something or press keys..."/>
+    <button id="eventBtn">Click Me</button>
+    <button id="clearBtn" style="background:#475569;">Clear Log</button>
+
+    <div id="eventLog" style="
+      margin-top:12px;
+      background:#0f172a;
+      border-radius:8px;
+      padding:12px;
+      max-height:200px;
+      overflow-y:auto;
+      font-size:0.82rem;
+      font-family:monospace;
+      color:#94a3b8;
+    ">
+      <p>Events will appear here...</p>
+    </div>
+  </div>
+
+  <script>
+    const log      = document.getElementById("eventLog");
+    const input    = document.getElementById("eventInput");
+    const btn      = document.getElementById("eventBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    function addLog(message, color) {
+      const p = document.createElement("p");
+      p.textContent = new Date().toLocaleTimeString() + " → " + message;
+      p.style.color = color || "#86efac";
+      log.appendChild(p);
+      log.scrollTop = log.scrollHeight; // scroll to bottom
+    }
+
+    // Click event
+    btn.addEventListener("click", function() {
+      addLog('Button "click" event fired', "#818cf8");
+    });
+
+    // Keydown event
+    input.addEventListener("keydown", function(e) {
+      addLog('keydown: "' + e.key + '"', "#fbbf24");
+    });
+
+    // Input event — fires on every character
+    input.addEventListener("input", function(e) {
+      addLog('input value: "' + e.target.value + '"', "#34d399");
+    });
+
+    // Mouseover on button
+    btn.addEventListener("mouseover", function() {
+      addLog("mouseover on button", "#f472b6");
+    });
+
+    // Clear log
+    clearBtn.addEventListener("click", function() {
+      log.innerHTML = "<p>Log cleared.</p>";
+    });
+  </script>
+
+</body>
+</html>

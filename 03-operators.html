@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Operators – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>➕ Operators</h1>
+  <p class="intro">Operators let you do math, compare values, and combine conditions.</p>
+
+  <div class="card">
+    <h2>1. Arithmetic Operators</h2>
+    <pre><code>let a = 10;
+let b = 3;
+
+console.log(a + b);  // 13  — addition
+console.log(a - b);  // 7   — subtraction
+console.log(a * b);  // 30  — multiplication
+console.log(a / b);  // 3.33 — division
+console.log(a % b);  // 1   — remainder (modulo)
+console.log(a ** b); // 1000 — power (10³)</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Assignment Operators</h2>
+    <pre><code>let score = 0;
+
+score = score + 10;  // long way
+score += 10;         // short way — same result
+
+score -= 5;   // score = score - 5
+score *= 2;   // score = score * 2
+score /= 4;   // score = score / 4
+
+score++;      // add 1
+score--;      // subtract 1
+
+console.log(score);</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. Comparison Operators — always return true or false</h2>
+    <pre><code>console.log(5 == "5");   // true  — equal VALUE (loose)
+console.log(5 === "5");  // false — equal VALUE and TYPE (strict) ✅ use this
+console.log(5 !== "5");  // true  — not strictly equal
+
+console.log(10 > 5);    // true
+console.log(10 < 5);    // false
+console.log(10 >= 10);  // true
+console.log(10 <= 9);   // false</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. Logical Operators — combine conditions</h2>
+    <pre><code>const age      = 20;
+const hasID    = true;
+
+// AND — both must be true
+console.log(age >= 18 && hasID);  // true
+
+// OR — at least one must be true
+console.log(age < 18 || hasID);   // true
+
+// NOT — flips true/false
+console.log(!hasID);              // false</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. String Concatenation with +</h2>
+    <pre><code>const first = "Hello";
+const second = "World";
+
+console.log(first + " " + second); // "Hello World"
+
+// Template literals are cleaner
+const name = "Alice";
+console.log(`Welcome, ${name}!`);  // "Welcome, Alice!"</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Mini Calculator</h2>
+    <input type="number" id="numA" placeholder="First number" style="width:120px"/>
+    <select id="operator">
+      <option>+</option>
+      <option>-</option>
+      <option>*</option>
+      <option>/</option>
+      <option>%</option>
+    </select>
+    <input type="number" id="numB" placeholder="Second number" style="width:120px"/>
+    <button onclick="calculate()">Calculate</button>
+    <p id="output" class="output"></p>
+  </div>
+
+  <script>
+    function calculate() {
+      const a  = parseFloat(document.getElementById("numA").value);
+      const b  = parseFloat(document.getElementById("numB").value);
+      const op = document.getElementById("operator").value;
+      const output = document.getElementById("output");
+
+      if (isNaN(a) || isNaN(b)) {
+        output.textContent = "Please enter two numbers.";
+        return;
+      }
+
+      let result;
+      if (op === "+") result = a + b;
+      else if (op === "-") result = a - b;
+      else if (op === "*") result = a * b;
+      else if (op === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
+      else if (op === "%") result = a % b;
+
+      output.textContent = a + " " + op + " " + b + " = " + result;
+    }
+  </script>
+
+</body>
+</html>

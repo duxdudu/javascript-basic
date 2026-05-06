@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Loops – JS Basics</title>
+  <link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>🔁 Loops</h1>
+  <p class="intro">Loops repeat a block of code multiple times so you don't have to write the same thing over and over.</p>
+
+  <div class="card">
+    <h2>1. for loop — when you know how many times</h2>
+    <pre><code>// for (start; condition; step)
+for (let i = 1; i <= 5; i++) {
+  console.log("Count: " + i);
+}
+// Count: 1
+// Count: 2
+// Count: 3
+// Count: 4
+// Count: 5</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>2. Looping through an array</h2>
+    <pre><code>const fruits = ["apple", "banana", "cherry"];
+
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+
+// Cleaner way — for...of
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+// apple  banana  cherry</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>3. while loop — when you don't know how many times</h2>
+    <pre><code>let count = 0;
+
+while (count < 5) {
+  console.log("count is " + count);
+  count++; // ⚠️ always update or it loops forever!
+}
+// count is 0 ... count is 4</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>4. do...while — runs at least once</h2>
+    <pre><code>let number = 10;
+
+do {
+  console.log("number is " + number);
+  number++;
+} while (number < 5);
+
+// Runs once even though 10 is not less than 5
+// Output: number is 10</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>5. forEach — loop built into arrays</h2>
+    <pre><code>const names = ["Alice", "Bob", "Charlie"];
+
+names.forEach(function(name) {
+  console.log("Hello, " + name + "!");
+});
+
+// Arrow function version (shorter)
+names.forEach(name => console.log("Hi " + name));
+</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>6. break and continue</h2>
+    <pre><code>// break — stop the loop early
+for (let i = 0; i < 10; i++) {
+  if (i === 5) break;
+  console.log(i); // 0 1 2 3 4
+}
+
+// continue — skip this step, keep going
+for (let i = 0; i < 6; i++) {
+  if (i === 3) continue;
+  console.log(i); // 0 1 2 4 5
+}</code></pre>
+  </div>
+
+  <!-- live demo -->
+  <div class="card demo-card">
+    <h2>🧪 Live Demo — Multiplication Table</h2>
+    <input type="number" id="numInput" placeholder="Enter a number" min="1" max="20"/>
+    <button onclick="showTable()">Show Table</button>
+    <div id="output" class="output" style="text-align:left; white-space:pre;"></div>
+  </div>
+
+  <script>
+    function showTable() {
+      const num    = parseInt(document.getElementById("numInput").value);
+      const output = document.getElementById("output");
+
+      if (isNaN(num) || num < 1) {
+        output.textContent = "Please enter a number greater than 0.";
+        return;
+      }
+
+      let result = "";
+
+      for (let i = 1; i <= 100; i++) {
+        result += num + " × " + i + " = " + (num * i) + "\n";
+      }
+
+      output.textContent = result;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Assessment - 50 Questions</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .assessment-container { max-width: 900px; margin: 0 auto; }
+    
+    .question-card {
+      background: #1e293b;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .question-card.correct { border-color: #10b981; background: #064e3b; }
+    .question-card.incorrect { border-color: #ef4444; background: #7f1d1d; }
+    
+    .question-number {
+      font-size: 0.8rem;
+      color: #6366f1;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .question-text {
+      font-size: 1rem;
+      color: #f1f5f9;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .code-block {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0;
+      font-family: "Cascadia Code", monospace;
+      font-size: 0.85rem;
+      color: #7dd3fc;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .option {
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+    .option:hover { border-color: #6366f1; background: #1e293b; }
+    .option.selected { border-color: #6366f1; background: #312e81; color: #fff; }
+    .option.correct-answer { border-color: #10b981; background: #064e3b; color: #86efac; }
+    .option.wrong-answer { border-color: #ef4444; background: #7f1d1d; color: #fca5a5; }
+    .option.disabled { cursor: not-allowed; opacity: 0.7; }
+    
+    .feedback {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.correct { background: #064e3b; border: 1px solid #10b981; color: #86efac; }
+    .feedback.incorrect { background: #7f1d1d; border: 1px solid #ef4444; color: #fca5a5; }
+    
+    .submit-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 32px 0;
+      transition: all 0.2s;
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .submit-btn:hover { background: #4f46e5; transform: translateY(-2px); }
+    .submit-btn:disabled { background: #475569; cursor: not-allowed; transform: none; }
+    
+    .results {
+      background: #1e293b;
+      border: 2px solid #6366f1;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      display: none;
+      margin: 32px 0;
+    }
+    .results.show { display: block; }
+    .score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #6366f1;
+      margin: 20px 0;
+    }
+    .score.pass { color: #10b981; }
+    .score.fail { color: #ef4444; }
+    
+    .restart-btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .restart-btn:hover { background: #059669; }
+    
+    .wrong-answer-card {
+      background: #1e293b;
+      border-left: 4px solid #ef4444;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .wrong-answer-card .question-num {
+      font-size: 0.75rem;
+      color: #ef4444;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .wrong-answer-card .question-text {
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+    .wrong-answer-card .code-block {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #7dd3fc;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .answer-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .your-answer, .correct-answer {
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .your-answer {
+      background: #7f1d1d;
+      border: 1px solid #ef4444;
+    }
+    .your-answer .label {
+      color: #fca5a5;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .your-answer .answer-text {
+      color: #fecaca;
+    }
+    .correct-answer {
+      background: #064e3b;
+      border: 1px solid #10b981;
+    }
+    .correct-answer .label {
+      color: #86efac;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .correct-answer .answer-text {
+      color: #bbf7d0;
+    }
+    .explanation-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 12px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .explanation-box strong {
+      color: #fbbf24;
+    }
+    
+    .timer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1e293b;
+      border: 2px solid #6366f1;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #6366f1;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .timer.warning {
+      border-color: #f59e0b;
+      color: #f59e0b;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    .instructions {
+      background: #1e293b;
+      border-left: 4px solid #6366f1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 32px;
+    }
+    .instructions h3 { color: #818cf8; margin-bottom: 12px; }
+    .instructions ul { color: #cbd5e1; padding-left: 20px; line-height: 1.8; }
+    
+    .progress-bar {
+      background: #0f172a;
+      border-radius: 20px;
+      height: 8px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: linear-gradient(90deg, #6366f1, #818cf8);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    .progress-text {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to Index</a>
+  <h1>📝 JavaScript Assessment - 50 Questions</h1>
+  <p class="intro">Complete assessment to test your JavaScript knowledge. You need 40/50 (80%) to pass.</p>
+
+  <div class="timer" id="timer">⏱️ 45:00</div>
+
+  <div class="assessment-container">
+
+    <div class="instructions">
+      <h3>📋 Instructions</h3>
+      <ul>
+        <li>You have <strong>45 minutes</strong> to complete 50 questions</li>
+        <li>Questions cover all JavaScript basics topics</li>
+        <li>Select one answer per question</li>
+        <li>You need <strong>40 out of 50 correct</strong> to pass (80%)</li>
+        <li>After submission, you'll see correct answers and explanations</li>
+        <li>You can retake the assessment if needed</li>
+      </ul>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">0 of 50 questions answered</div>
+
+    <button class="submit-btn" id="submitBtn">Submit Assessment</button>
+
+    <div class="results" id="results">
+      <h2 style="color:#f1f5f9; margin-bottom:12px;">Assessment Complete!</h2>
+      <div class="score" id="scoreDisplay">0/50</div>
+      <p id="resultMessage" style="color:#cbd5e1; font-size:1.1rem; margin-bottom:8px;"></p>
+      <p id="resultDetail" style="color:#94a3b8; font-size:0.9rem;"></p>
+      <button class="restart-btn" onclick="location.reload()">Retake Assessment</button>
+      <a href="index.html" style="display:inline-block; margin-top:16px; color:#6366f1; text-decoration:none;">← Back to Index</a>
+    </div>
+
+    <!-- Wrong Answers Summary Card - Shows immediately after results -->
+    <div id="wrongAnswersSummary" style="display:none; margin-top:32px; margin-bottom:40px;">
+      <div style="background:#1e293b; border:2px solid #ef4444; border-radius:12px; padding:32px;">
+        <h2 style="color:#fca5a5; margin-bottom:8px; text-align:center;">❌ Review Your Mistakes</h2>
+        <p style="color:#94a3b8; text-align:center; margin-bottom:24px; font-size:0.9rem;">
+          Focus on these questions to improve your score
+        </p>
+        <div id="wrongAnswersContainer"></div>
+        <div style="text-align:center; margin-top:24px;">
+          <button onclick="document.getElementById('questionsContainer').scrollIntoView({behavior:'smooth'})" 
+                  style="background:#6366f1; color:#fff; border:none; padding:10px 24px; border-radius:8px; cursor:pointer; font-size:0.9rem;">
+            📋 View All Questions Below
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+  </div>
+
+  <script src="assessment-50-questions.js"></script>
+  <script>
+    // User answers
+    const userAnswers = {};
+    
+    // Timer
+    let timeLeft = 45 * 60; // 45 minutes
+    let timerInterval;
+
+    // Render all questions
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      
+      assessmentQuestions.forEach(q => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.dataset.question = q.id;
+        
+        card.innerHTML = `
+          <div class="question-number">Question ${q.id} of 50</div>
+          <div class="question-text">${q.question}</div>
+          ${q.code ? `<div class="code-block">${q.code}</div>` : ''}
+          <div class="options">
+            ${q.options.map((opt, idx) => {
+              const letter = String.fromCharCode(97 + idx); // a, b, c, d
+              return `<div class="option" data-answer="${letter}">${opt}</div>`;
+            }).join('')}
+          </div>
+          <div class="feedback"></div>
+        `;
+        
+        container.appendChild(card);
+      });
+      
+      // Add click handlers
+      document.querySelectorAll(".option").forEach(option => {
+        option.addEventListener("click", handleOptionClick);
+      });
+    }
+
+    // Handle option selection
+    function handleOptionClick() {
+      const card = this.closest(".question-card");
+      const questionId = parseInt(card.dataset.question);
+      
+      // Don't allow changes after submission
+      if (card.classList.contains("correct") || card.classList.contains("incorrect")) {
+        return;
+      }
+
+      // Remove previous selection
+      card.querySelectorAll(".option").forEach(opt => {
+        opt.classList.remove("selected");
+      });
+
+      // Mark this option as selected
+      this.classList.add("selected");
+      userAnswers[questionId] = this.dataset.answer;
+      
+      // Update progress
+      updateProgress();
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const answered = Object.keys(userAnswers).length;
+      const percentage = (answered / 50) * 100;
+      
+      document.getElementById("progressFill").style.width = percentage + "%";
+      document.getElementById("progressText").textContent = `${answered} of 50 questions answered`;
+    }
+
+    // Submit assessment
+    document.getElementById("submitBtn").addEventListener("click", function() {
+      // Check if all questions are answered
+      if (Object.keys(userAnswers).length < 50) {
+        alert(`Please answer all questions before submitting. You have answered ${Object.keys(userAnswers).length}/50 questions.`);
+        return;
+      }
+
+      // Stop timer
+      clearInterval(timerInterval);
+
+      // Disable submit button
+      this.disabled = true;
+      this.textContent = "Submitted ✓";
+
+      // Calculate score and collect wrong answers
+      let score = 0;
+      const wrongAnswers = [];
+
+      // Check each answer
+      assessmentQuestions.forEach(q => {
+        const card = document.querySelector(`[data-question="${q.id}"]`);
+        const userAnswer = userAnswers[q.id];
+        const correctAnswer = q.correct;
+        const isCorrect = userAnswer === correctAnswer;
+
+        if (isCorrect) {
+          score++;
+          card.classList.add("correct");
+        } else {
+          card.classList.add("incorrect");
+          
+          // Collect wrong answer details
+          wrongAnswers.push({
+            questionNum: q.id,
+            question: q.question,
+            code: q.code,
+            userAnswer: userAnswer,
+            correctAnswer: correctAnswer,
+            options: q.options,
+            explanation: q.explanation
+          });
+        }
+
+        // Show feedback
+        const feedback = card.querySelector(".feedback");
+        const prefix = isCorrect ? "✅ Correct! " : "❌ Incorrect. ";
+        feedback.textContent = prefix + q.explanation;
+        feedback.classList.add("show", isCorrect ? "correct" : "incorrect");
+
+        // Highlight correct/wrong answers
+        card.querySelectorAll(".option").forEach(opt => {
+          opt.classList.add("disabled");
+          
+          if (opt.dataset.answer === correctAnswer) {
+            opt.classList.add("correct-answer");
+          }
+          
+          if (opt.dataset.answer === userAnswer && !isCorrect) {
+            opt.classList.add("wrong-answer");
+          }
+        });
+      });
+
+      // Show results
+      showResults(score);
+
+      // Always show wrong answers summary (or perfect score message)
+      showWrongAnswersSummary(wrongAnswers);
+
+      // Save to localStorage
+      saveResult(score);
+      
+      // Scroll to results
+      document.getElementById("results").scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Show results
+    function showResults(score) {
+      const results = document.getElementById("results");
+      const scoreDisplay = document.getElementById("scoreDisplay");
+      const resultMessage = document.getElementById("resultMessage");
+      const resultDetail = document.getElementById("resultDetail");
+
+      const passed = score >= 40;
+      const percentage = Math.round((score / 50) * 100);
+
+      scoreDisplay.textContent = score + "/50";
+      scoreDisplay.classList.add(passed ? "pass" : "fail");
+
+      if (passed) {
+        resultMessage.textContent = "🎉 Congratulations! You passed!";
+        resultDetail.textContent = `You scored ${percentage}% (${score}/50 correct). You're ready for the next session!`;
+      } else {
+        resultMessage.textContent = "📚 Keep practicing!";
+        resultDetail.textContent = `You scored ${percentage}% (${score}/50 correct). You need 40/50 (80%) to pass. Review the topics and try again.`;
+      }
+
+      results.classList.add("show");
+    }
+
+    // Show wrong answers summary
+    function showWrongAnswersSummary(wrongAnswers) {
+      const summarySection = document.getElementById("wrongAnswersSummary");
+      const container = document.getElementById("wrongAnswersContainer");
+      
+      container.innerHTML = '';
+      
+      if (wrongAnswers.length === 0) {
+        // Perfect score - no mistakes!
+        container.innerHTML = `
+          <div style="text-align:center; padding:40px 20px;">
+            <div style="font-size:4rem; margin-bottom:16px;">🎯</div>
+            <h3 style="color:#86efac; font-size:1.3rem; margin-bottom:8px;">Perfect Score!</h3>
+            <p style="color:#94a3b8; font-size:0.95rem;">You answered all 50 questions correctly. Excellent work!</p>
+          </div>
+        `;
+        summarySection.style.display = 'block';
+        return;
+      }
+      
+      wrongAnswers.forEach(wa => {
+        const card = document.createElement("div");
+        card.className = "wrong-answer-card";
+        
+        // Get the text of the answers
+        const userAnswerText = wa.options[wa.userAnswer.charCodeAt(0) - 97]; // Convert 'a' to 0, 'b' to 1, etc.
+        const correctAnswerText = wa.options[wa.correctAnswer.charCodeAt(0) - 97];
+        
+        card.innerHTML = `
+          <div class="question-num">Question ${wa.questionNum}</div>
+          <div class="question-text">${wa.question}</div>
+          ${wa.code ? `<div class="code-block">${wa.code}</div>` : ''}
+          
+          <div class="answer-comparison">
+            <div class="your-answer">
+              <div class="label">❌ Your Answer</div>
+              <div class="answer-text">${userAnswerText}</div>
+            </div>
+            <div class="correct-answer">
+              <div class="label">✅ Correct Answer</div>
+              <div class="answer-text">${correctAnswerText}</div>
+            </div>
+          </div>
+          
+          <div class="explanation-box">
+            <strong>💡 Explanation:</strong> ${wa.explanation}
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+      
+      summarySection.style.display = 'block';
+    }
+
+    // Timer
+    function startTimer() {
+      const timerEl = document.getElementById("timer");
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerEl.textContent = `⏱️ ${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+        // Warning when 5 minutes left
+        if (timeLeft <= 300) {
+          timerEl.classList.add("warning");
+        }
+
+        // Time's up
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          timerEl.textContent = "⏱️ Time's Up!";
+          document.getElementById("submitBtn").click();
+        }
+      }, 1000);
+    }
+
+    // Save result to localStorage
+    function saveResult(score) {
+      const results = JSON.parse(localStorage.getItem("assessmentResults") || "[]");
+      results.push({
+        date: new Date().toISOString(),
+        score: score,
+        total: 50,
+        passed: score >= 40,
+        percentage: Math.round((score / 50) * 100)
+      });
+      localStorage.setItem("assessmentResults", JSON.stringify(results));
+    }
+
+    // Initialize
+    renderQuestions();
+    startTimer();
+  </script>
+
+</body>
+</html>
